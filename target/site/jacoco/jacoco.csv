@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+CosmosAssignment,com.assignment.cosmos.config,TraceRequestConfig,0,28,1,1,0,11,1,4,0,4
+CosmosAssignment,com.assignment.cosmos.model,DecisionDto,9,74,0,0,3,26,3,8,3,8
+CosmosAssignment,com.assignment.cosmos.model,MeetingDto,19,83,0,0,7,29,5,9,5,9
+CosmosAssignment,com.assignment.cosmos.request,DecisionRequest,106,15,22,0,1,3,17,3,6,3
+CosmosAssignment,com.assignment.cosmos.request,MeetingRequest,143,21,30,0,1,4,22,4,7,4
+CosmosAssignment,com.assignment.cosmos.controller,AssignmentResourceImpl,14,31,2,2,4,9,2,4,0,4
+CosmosAssignment,com.assignment.cosmos.service,DecisionService,0,50,0,0,0,13,0,4,0,4
+CosmosAssignment,com.assignment.cosmos.service,MeetingService,0,68,0,2,0,18,0,4,0,3
+CosmosAssignment,com.assignment.cosmos.utils,Util,24,31,2,0,8,9,4,2,3,2
+CosmosAssignment,com.assignment.cosmos,CosmosAssignmentApplication,5,3,0,0,2,1,1,1,1,1
+CosmosAssignment,com.assignment.cosmos.response,ApiResponse,56,59,15,7,0,3,13,7,2,7

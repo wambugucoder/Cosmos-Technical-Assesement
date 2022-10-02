@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssignmentResourceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CosmosAssignment</a> &gt; <a href="index.source.html" class="el_package">com.assignment.cosmos.controller</a> &gt; <span class="el_source">AssignmentResourceImpl.java</span></div><h1>AssignmentResourceImpl.java</h1><pre class="source lang-java linenums">package com.assignment.cosmos.controller;
+
+
+import com.assignment.cosmos.model.DecisionDto;
+import com.assignment.cosmos.request.DecisionRequest;
+import com.assignment.cosmos.request.MeetingRequest;
+import com.assignment.cosmos.response.ApiResponse;
+import com.assignment.cosmos.service.DecisionService;
+import com.assignment.cosmos.service.MeetingService;
+import com.assignment.cosmos.utils.Util;
+import lombok.experimental.ExtensionMethod;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RestController;
+
+
+
+@RestController
+@ExtensionMethod({Util.class})
+public class AssignmentResourceImpl implements AssignmentResource {
+    private final MeetingService meetingService;
+     private final DecisionService decisionService;
+
+     @Autowired
+<span class="fc" id="L26">    public AssignmentResourceImpl(MeetingService meetingService, DecisionService decisionService) {</span>
+<span class="fc" id="L27">        this.meetingService = meetingService;</span>
+<span class="fc" id="L28">        this.decisionService = decisionService;</span>
+<span class="fc" id="L29">    }</span>
+
+    @Override
+    public ResponseEntity&lt;ApiResponse&gt; createMeeting(MeetingRequest meetingRequest, BindingResult bindingResult) {
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if(bindingResult.hasErrors()) {</span>
+<span class="nc" id="L34">            ApiResponse response = &quot;Please check if any of the Meeting details provided are null&quot;.toFailureExecution();</span>
+<span class="nc" id="L35">            return ResponseEntity.badRequest().body(response);</span>
+        }
+<span class="fc" id="L37">        return meetingService.createMeeting(meetingRequest);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;ApiResponse&gt; createDecision(DecisionRequest decisionRequest, BindingResult bindingResult) {
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if(bindingResult.hasErrors()) {</span>
+<span class="nc" id="L43">            ApiResponse response = &quot;Please check if any of the Decision details provided are null&quot;.toFailureExecution();</span>
+<span class="nc" id="L44">            return ResponseEntity.badRequest().body(response);</span>
+        }
+<span class="fc" id="L46">        return decisionService.createDecision(decisionRequest);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;DecisionDto&gt; getMeetingWithDecisions(String decision) {
+<span class="fc" id="L51">        return ResponseEntity.ok(decisionService.listMeetingwithDecisions(decision));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

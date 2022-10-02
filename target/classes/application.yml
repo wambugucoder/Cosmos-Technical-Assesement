@@ -1,0 +1,64 @@
+server:
+  port: 8443
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
+spring:
+  main:
+    banner-mode: off
+
+  jpa:
+    hibernate.ddl-auto: update
+    properties:
+     hibernate.default-schema: public
+  test:
+    database:
+       replace: none
+  datasource:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://database:5432/Dev-Schema
+      username: postgres
+      password: postgres
+
+    
+logging:
+  level:
+    web: debug
+    root: debug
+
+
+management:
+  endpoints:
+     web:
+       exposure:
+         include: "*"
+
+  metrics:
+     export:
+        datadog:
+           api-key: 4a5c0384d63f3d1f9d64acd40a60159e
+           application-key: 44764b562c5053224fea38b6bfe3f2da832936f1
+           uri: https://app.datadoghq.eu
+           step: 10s
+           host-tag: Java-Backend
+     distribution:
+        percentiles:
+          http:
+            server:
+              requests: 0.5, 0.95, 0.99
+        percentiles-histogram:
+          http:
+            server:
+              requests: true
+        sla:
+          http:
+            server:
+               requests: 200ms, 400ms, 600ms
+     tags:
+       application: Cosmos-Backend
+       env: Java-Dev
+
+  info:
+    git:
+      mode: full

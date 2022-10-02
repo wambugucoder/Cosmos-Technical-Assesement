@@ -1,0 +1,14 @@
+com\assignment\cosmos\repository\MeetingRepositoryTest.class
+com\assignment\cosmos\CommonFixtures.class
+com\assignment\cosmos\service\DecisionServiceTest.class
+com\assignment\cosmos\controller\AssignmentResourceImplTest.class
+com\assignment\cosmos\config\TraceRequestConfigTest.class
+com\assignment\cosmos\TestContainer.class
+com\assignment\cosmos\service\MeetingServiceTest.class
+com\assignment\cosmos\TestContainerTest.class
+com\assignment\cosmos\CommonFixtures$1$1.class
+com\assignment\cosmos\CosmosAssignmentApplicationTests.class
+com\assignment\cosmos\repository\DecisionRepositoryTest.class
+com\assignment\cosmos\CommonFixtures$1.class
+com\assignment\cosmos\Java11Test.class
+com\assignment\cosmos\CommonFixtures$1$1$1.class

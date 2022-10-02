@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Util.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">CosmosAssignment</a> &gt; <a href="index.source.html" class="el_package">com.assignment.cosmos.utils</a> &gt; <span class="el_source">Util.java</span></div><h1>Util.java</h1><pre class="source lang-java linenums">package com.assignment.cosmos.utils;
+
+
+import com.assignment.cosmos.model.DecisionDto;
+import com.assignment.cosmos.model.MeetingDto;
+import com.assignment.cosmos.request.MeetingRequest;
+import com.assignment.cosmos.response.ApiResponse;
+import java.util.UUID;
+import java.util.function.Function;
+
+
+<span class="nc" id="L12">public class Util {</span>
+
+    public static MeetingDto toMeetingDto(MeetingRequest meetingRequest) {
+<span class="fc" id="L15">        MeetingDto meetingDto= new MeetingDto();</span>
+<span class="fc" id="L16">        meetingDto.setId(UUID.randomUUID().toString());</span>
+<span class="fc" id="L17">        meetingDto.setDuration(meetingRequest.getDuration());</span>
+<span class="fc" id="L18">        meetingDto.setTitle(meetingRequest.getTitle());</span>
+<span class="fc" id="L19">        return meetingDto;</span>
+    }
+
+    public static ApiResponse toSuccessExecution(String message){
+<span class="fc" id="L23">        ApiResponse response = new ApiResponse();</span>
+<span class="fc" id="L24">        response.setMessage(message);</span>
+<span class="fc" id="L25">        response.setError(false);</span>
+<span class="fc" id="L26">        return response;</span>
+    }
+
+    public static ApiResponse toFailureExecution(String message){
+<span class="nc" id="L30">        ApiResponse response = new ApiResponse();</span>
+<span class="nc" id="L31">        response.setMessage(message);</span>
+<span class="nc" id="L32">        response.setError(true);</span>
+<span class="nc" id="L33">        return response;</span>
+    }
+
+    public static Object whenNotNull(Object o, Function&lt;Object, Object&gt; f) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if(o !=null){</span>
+<span class="nc" id="L38">           return f.apply(o);</span>
+        }
+<span class="nc" id="L40">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

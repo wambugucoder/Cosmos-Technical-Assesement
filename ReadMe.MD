@@ -14,7 +14,7 @@ ensure you follow the steps below </p>
 <p>We need to ensure that all 6 containers are up and running in order to begin testing</p>
 <p>I decided to use DataDog to monitor the status of our containers in order to forsee any failures</p>
 
-You can Proceed the same by using this link [DataDog Container Metric](https://app.datadoghq.eu/dash/integration/488/containers---overview?from_ts=1664044941581&to_ts=1664045241581&live=true).
+You can proceed the same by using this link [DataDog Container Metric](https://app.datadoghq.eu/dash/integration/488/containers---overview?from_ts=1664044941581&to_ts=1664045241581&live=true).
 ![DataDog Container Check](./images/Running_Container.PNG)
 
 ### Getting Straight into Testing APIs

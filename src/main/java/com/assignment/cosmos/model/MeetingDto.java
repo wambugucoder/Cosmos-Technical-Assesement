@@ -1,11 +1,9 @@
 package com.assignment.cosmos.model;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,8 +23,7 @@ public class MeetingDto {
     private Long duration;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<DecisionDto> decisionDto;
+    private List<DecisionDto> decisionDto = new ArrayList<>();
 
     public MeetingDto(String id, String title, Timestamp timestamp, Long duration, List<DecisionDto> decisionDto) {
         this.id = id;
@@ -61,9 +58,7 @@ public class MeetingDto {
     public void setTitle(String title) {
         this.title = title;
     }
-    public void addDecision(DecisionDto decisionDto){
-        this.decisionDto.add(decisionDto);
-    }
+
 
     public Timestamp getTimestamp() {
         return timestamp;

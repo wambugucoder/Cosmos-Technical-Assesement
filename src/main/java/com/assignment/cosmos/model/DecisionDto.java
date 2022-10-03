@@ -2,6 +2,8 @@ package com.assignment.cosmos.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -22,17 +24,13 @@ public class DecisionDto {
     private Timestamp timestamp= Timestamp.from(Instant.now());
 
     @ManyToOne
-    @JoinColumn(name="meeting_id",referencedColumnName = "id")
+    @JoinColumn(name = "meeting_id", referencedColumnName = "id")
+    @JsonBackReference
     private MeetingDto meeting;
 
     public DecisionDto() {
     }
 
-    public DecisionDto(String text,MeetingDto meeting) {
-        id = getId();
-        this.text=text;
-       this.meeting = meeting;
-    }
 
     public DecisionDto(String id, String text, Timestamp timestamp, MeetingDto meeting) {
         this.id = id;

@@ -1,7 +1,6 @@
 package com.assignment.cosmos.controller;
 
 
-import com.assignment.cosmos.model.DecisionDto;
 import com.assignment.cosmos.request.DecisionRequest;
 import com.assignment.cosmos.request.MeetingRequest;
 import com.assignment.cosmos.response.ApiResponse;
@@ -15,9 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
-@RestController
 @ExtensionMethod({Util.class})
+@RestController
 public class AssignmentResourceImpl implements AssignmentResource {
     private final MeetingService meetingService;
      private final DecisionService decisionService;
@@ -47,7 +45,7 @@ public class AssignmentResourceImpl implements AssignmentResource {
     }
 
     @Override
-    public ResponseEntity<DecisionDto> getMeetingWithDecisions(String decision) {
-        return ResponseEntity.ok(decisionService.listMeetingwithDecisions(decision));
+    public ResponseEntity<?> getMeetingWithDecisions() {
+        return meetingService.getMeetings();
     }
 }

@@ -44,12 +44,12 @@ class AssignmentResourceImplTest {
     @Test
     void getDecisionByAssociation() {
         MeetingService meetingService = mock(MeetingService.class);
-        DecisionService decisionService= mock(DecisionService.class);
-        AssignmentResourceImpl assignmentResource= new AssignmentResourceImpl(meetingService,decisionService);
+        DecisionService decisionService = mock(DecisionService.class);
+        AssignmentResourceImpl assignmentResource = new AssignmentResourceImpl(meetingService, decisionService);
 
 
-        assignmentResource.getMeetingWithDecisions(RANDOM_ID);
-        verify(decisionService).listMeetingwithDecisions(RANDOM_ID);
+        assignmentResource.getMeetingWithDecisions();
+        verify(meetingService).getMeetings();
     }
 
 }

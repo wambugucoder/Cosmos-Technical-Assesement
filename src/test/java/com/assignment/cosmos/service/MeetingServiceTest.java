@@ -10,6 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Collections;
+import java.util.List;
+
 import static com.assignment.cosmos.CommonFixtures.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,5 +38,28 @@ class MeetingServiceTest {
         assertEquals(meetingService.createMeeting(meetingRequest), ResponseEntity.ok(response));
 
     }
+
+    @Test
+    void getMeeting() {
+        MeetingRepository meetingRepository = mock(MeetingRepository.class);
+
+        MeetingService meetingService = new MeetingService(meetingRepository);
+
+        when(meetingRepository.findAll()).thenReturn(List.of(meetingDto));
+
+        assertEquals(meetingService.getMeetings(), ResponseEntity.ok(List.of(meetingDto)));
+    }
+
+    @Test
+    void getMeeting_EmptyList() {
+        MeetingRepository meetingRepository = mock(MeetingRepository.class);
+
+        MeetingService meetingService = new MeetingService(meetingRepository);
+
+        when(meetingRepository.findAll()).thenReturn(Collections.emptyList());
+
+        assertEquals(meetingService.getMeetings(), ResponseEntity.badRequest().body("No results found".toFailureExecution()));
+    }
+
 
 }

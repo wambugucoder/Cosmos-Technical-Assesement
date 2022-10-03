@@ -13,7 +13,6 @@ public class Util {
 
     public static MeetingDto toMeetingDto(MeetingRequest meetingRequest) {
         MeetingDto meetingDto= new MeetingDto();
-        meetingDto.setId(UUID.randomUUID().toString());
         meetingDto.setDuration(meetingRequest.getDuration());
         meetingDto.setTitle(meetingRequest.getTitle());
         return meetingDto;
@@ -32,12 +31,5 @@ public class Util {
         response.setError(true);
         return response;
     }
-
-    public static Object whenNotNull(Object o, Function<Object, Object> f) {
-        if(o !=null){
-           return f.apply(o);
-        }
-        return null;
-    }
-
+    
 }

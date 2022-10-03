@@ -16,12 +16,12 @@ spring:
     database:
        replace: none
   datasource:
-      driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://database:5432/Dev-Schema
-      username: postgres
-      password: postgres
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://database:5432/Dev-Schema
+    username: postgres
+    password: postgres
 
-    
+
 logging:
   level:
     web: debug

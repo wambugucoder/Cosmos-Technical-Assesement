@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,32 +26,33 @@ public  class CommonFixtures {
     public static String POSTGRES_DOCKER_IMAGE = "postgres:10.3";
 
     static Instant instant = Instant.parse("2022-08-19T16:02:42.00Z");
-
-    // create ZoneId object for Asia/Calcutta zone
+    
     static ZoneId zoneId = ZoneId.of("Africa/Nairobi");
 
 
-    public static Timestamp fixedTimeStamp = Timestamp.from(Instant.now(Clock.fixed(instant,zoneId)));
+    public static Timestamp fixedTimeStamp = Timestamp.from(Instant.now(Clock.fixed(instant, zoneId)));
 
     public static Span SPAN = getTestTrace().currentSpan();
-    public static DecisionDto createDecision(){
-       DecisionDto decisionDto= new DecisionDto();
-       MeetingDto meetingDto1=new MeetingDto();
-       meetingDto1.setId(RANDOM_ID);
-       meetingDto1.setDuration(1L);
-       meetingDto1.setDecisionDto((List.of(decisionDto)));
-       decisionDto.setId(RANDOM_ID);
-       decisionDto.setText("Text");
-       decisionDto.setTimestamp(fixedTimeStamp);
-       decisionDto.setMeeting(meetingDto1);
-       return decisionDto;
+
+    public static DecisionDto createDecision() {
+        DecisionDto decisionDto = new DecisionDto();
+        MeetingDto meetingDto1 = new MeetingDto();
+        meetingDto1.setId(RANDOM_ID);
+        meetingDto1.setDuration(1L);
+        meetingDto1.setDecisionDto((List.of(decisionDto)));
+        decisionDto.setId(RANDOM_ID);
+        decisionDto.setText("Text");
+        decisionDto.setTimestamp(fixedTimeStamp);
+        decisionDto.setMeeting(meetingDto1);
+        return decisionDto;
     }
 
-    public static DecisionRequest decisionRequest = new DecisionRequest("TEXT",RANDOM_ID);
+    public static DecisionRequest decisionRequest = new DecisionRequest(List.of("DECISION1", "DECISION2"), RANDOM_ID);
 
-    public static MeetingRequest meetingRequest = new MeetingRequest("test",2L,List.of("1","2"));
-    public static MeetingDto meetingDto = new MeetingDto(RANDOM_ID,"Title1",fixedTimeStamp, 1L, List.of(new DecisionDto()));
-    public static MeetingDto meetingDto2 = new MeetingDto("Title2", 2L,List.of(createDecision()));
+    public static MeetingRequest meetingRequest = new MeetingRequest("test", 2L);
+    public static MeetingDto meetingDto = new MeetingDto(RANDOM_ID, "Title1", fixedTimeStamp, 1L, Collections.emptyList());
+    public static MeetingDto meetingDto2 = new MeetingDto("Title2", 2L, List.of(createDecision()));
+    public static DecisionDto decisionDto = new DecisionDto(RANDOM_ID, "DECISION", fixedTimeStamp, new MeetingDto());
 
 
     public static Tracer getTestTrace() {

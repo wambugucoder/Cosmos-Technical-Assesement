@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -20,27 +22,28 @@ import org.springframework.stereotype.Service;
 @ExtensionMethod({Util.class})
 public class DecisionService {
 
-    private final DecisionRepository decisionRepository;
     private final MeetingRepository meetingRepository;
+
     @Autowired
-    public DecisionService(DecisionRepository decisionRepository, MeetingRepository meetingRepository) {
-        this.decisionRepository = decisionRepository;
+    public DecisionService(MeetingRepository meetingRepository) {
         this.meetingRepository = meetingRepository;
     }
 
-    public ResponseEntity<ApiResponse> createDecision(DecisionRequest decisionRequest){
+    public ResponseEntity<ApiResponse> createDecision(DecisionRequest decisionRequest) {
         MeetingDto meetingDto = meetingRepository.getById(decisionRequest.getMeetingId());
-        DecisionDto decisionDto = new DecisionDto();
-        decisionDto.setMeeting(meetingDto);
-        decisionDto.setText(decisionRequest.getText());
-
-
-        decisionRepository.save(decisionDto);
-        log.info("Decision has Been Created for meeting with title:"+meetingDto.getTitle());
+        // Create copy of mutable list to avoid UnsupportedOperationException
+        List<DecisionDto> decisionDtoList = meetingDto.getDecisionDto();
+        List<DecisionDto> decisionToUpdate = new ArrayList<>(decisionDtoList);
+        
+        for (String eachDecision : decisionRequest.getText()) {
+            DecisionDto decisionDto = new DecisionDto();
+            decisionDto.setMeeting(meetingDto);
+            decisionDto.setText(eachDecision);
+            decisionToUpdate.add(decisionDto);
+        }
+        meetingDto.setDecisionDto(decisionToUpdate);
+        meetingRepository.save(meetingDto);
         return ResponseEntity.ok("Decision Created Successfully".toSuccessExecution());
     }
 
-    public DecisionDto listMeetingwithDecisions(String decision) {
-       return decisionRepository.findByText(decision);
-    }
 }

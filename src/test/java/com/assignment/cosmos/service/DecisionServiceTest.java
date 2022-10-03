@@ -2,7 +2,6 @@ package com.assignment.cosmos.service;
 
 
 import com.assignment.cosmos.model.MeetingDto;
-import com.assignment.cosmos.repository.DecisionRepository;
 import com.assignment.cosmos.repository.MeetingRepository;
 import com.assignment.cosmos.response.ApiResponse;
 import com.assignment.cosmos.utils.Util;
@@ -24,7 +23,6 @@ import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
-@AutoConfigureMockMvc
 @ExtensionMethod({Util.class})
 class DecisionServiceTest {
 
@@ -33,22 +31,14 @@ class DecisionServiceTest {
     @Test
     void createDecision() {
         MeetingRepository meetingRepository = mock(MeetingRepository.class);
-        DecisionRepository decisionRepository= mock(DecisionRepository.class);
-        DecisionService decisionService= new DecisionService(decisionRepository, meetingRepository);
 
-        when (meetingRepository.getById(any(String.class))).thenReturn(new MeetingDto());
+        DecisionService decisionService = new DecisionService(meetingRepository);
+
+        when(meetingRepository.getById(any(String.class))).thenReturn(meetingDto);
         ResponseEntity<ApiResponse> actual = decisionService.createDecision(decisionRequest);
-        verify(decisionRepository).save(any());
-        assert(actual.equals(ResponseEntity.ok("Decision Created Successfully".toSuccessExecution())));
+        verify(meetingRepository).save(any(MeetingDto.class));
+        assert (actual.equals(ResponseEntity.ok("Decision Created Successfully".toSuccessExecution())));
     }
 
-    @Test
-    void listMeeting() {
-        MeetingRepository meetingRepository = mock(MeetingRepository.class);
-        DecisionRepository decisionRepository= mock(DecisionRepository.class);
-        DecisionService decisionService= new DecisionService(decisionRepository, meetingRepository);
 
-        decisionService.listMeetingwithDecisions(RANDOM_ID);
-        verify(decisionRepository).findByText(RANDOM_ID);
-    }
 }
